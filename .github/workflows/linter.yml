@@ -2,8 +2,7 @@ name: Linter on pull request
 
 on:
   pull_request:
-    branches:
-      - main
+  push:
 
 permissions:
   checks: write
@@ -26,9 +25,11 @@ jobs:
       # ESLint and Prettier must be in `package.json`
       - name: Install Node.js dependencies
         run: npm ci
+        working-directory: myApp
 
       - name: Run linters
-        uses: wearerequired/lint-action@v2
-        with:
-          eslint: true
-          prettier: true
+        run: npm run lint
+        working-directory: myApp
+
+
+    #ng add @angular-eslint/schematics
