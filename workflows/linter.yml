@@ -1,9 +1,6 @@
 name: Linter on pull request
 
 on:
-  pull_request:
-    branches:
-      - main
   [push]
 
 permissions:
