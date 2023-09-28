@@ -30,6 +30,5 @@ jobs:
       - name: Run linters
         run: npm run lint
         working-directory: myApp
-
-
-    #ng add @angular-eslint/schematics
+        
+        #ng add @angular-eslint/schematics
