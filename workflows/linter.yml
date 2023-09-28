@@ -1,7 +1,7 @@
 name: Linter on pull request
 
 on:
-  [push]
+  push:
 
 permissions:
   checks: write
