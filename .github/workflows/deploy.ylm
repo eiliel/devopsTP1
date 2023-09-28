@@ -1,0 +1,40 @@
+name: Deployment Pipeline
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Angular application
+        run: ng build --prod --base-href=/myApp/
+
+      - name: Deploy to GitHub Pages
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          echo "myapp.com" > CNAME  # Si vous avez un CNAME personnalisé
+
+          git checkout --orphan gh-pages
+          git --work-tree=dist/myApp add --all
+          git --work-tree=dist/myApp commit -m "Deploy to GitHub Pages"
+          git push origin HEAD:gh-pages --force
