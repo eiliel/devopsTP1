@@ -24,17 +24,3 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Build Angular application
-        run: ng build --prod --base-href=/myApp/
-
-      - name: Deploy to GitHub Pages
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          echo "myapp.com" > CNAME  # Si vous avez un CNAME personnalisé
-
-          git checkout --orphan gh-pages
-          git --work-tree=dist/myApp add --all
-          git --work-tree=dist/myApp commit -m "Deploy to GitHub Pages"
-          git push origin HEAD:gh-pages --force
